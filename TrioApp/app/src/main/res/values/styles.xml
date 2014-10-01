@@ -1,8 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.NoActionBar">
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/trio_yellow</item>
+    </style>
+
+
+    <!-- Base application theme. -->
+    <style name="NoTitleBarTheme" parent="android:Theme.Holo.NoActionBar">
         <!-- Customize your theme here. -->
     </style>
+
 
 </resources>

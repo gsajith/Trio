@@ -2,4 +2,5 @@
 <resources>
     <color name="trio_yellow">#ffc74e</color>
     <color name="trio_dark">#bf9832</color>
+    <color name="nav_divider">#dddddd</color>
 </resources>
