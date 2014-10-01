@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TitleActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/titlebg"
+            />
+
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="140dp"
+            android:src="@drawable/triotitle"
+            android:layout_gravity="center_horizontal|top"
+            />
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="310dp"
+            android:layout_marginTop="130dp"
+            android:src="@drawable/titlebands"
+            android:layout_gravity="center_horizontal|top"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="80dp"
+            android:textColor="#ffffff"
+            android:text="Discover upcoming concerts and\nlive music events in your area!"
+            android:textSize="20sp"
+            android:gravity="center"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/start_button"
+            android:text="GET STARTED"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@color/trio_dark"
+            />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right|bottom"
+            android:background="@color/trio_dark"
+            />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left|bottom"
+            android:background="@color/trio_dark"
+            />
+
+
+
+    </FrameLayout>
+
+
+</RelativeLayout>
