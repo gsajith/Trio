@@ -5,10 +5,20 @@
     tools:context=".TitleActivity">
 
     <ImageView
+        android:id="@+id/titlebgs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="matrix"
         android:src="@drawable/titlebg"
+        />
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp"
+        android:src="@drawable/trioshadow"
+        android:layout_gravity="center_horizontal|top"
         />
 
     <ImageView

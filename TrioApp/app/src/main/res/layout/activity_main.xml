@@ -8,13 +8,10 @@
     tools:context="com.trioshows.trio.MainActivity">
 
     <FrameLayout
+        android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <TextView
-            android:text="@string/hello_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </FrameLayout>
 
     <ListView android:id="@+id/left_drawer"
