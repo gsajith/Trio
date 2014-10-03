@@ -7,12 +7,18 @@
     android:id="@+id/main_layout"
     tools:context="com.trioshows.trio.MainActivity">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         >
-    </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/trio_dark"/>
+
+    </LinearLayout>
 
     <ListView android:id="@+id/left_drawer"
         android:layout_width="240dp"

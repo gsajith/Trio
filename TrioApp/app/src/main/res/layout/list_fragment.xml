@@ -19,11 +19,20 @@
         android:layout_marginTop="10dp"/>
 
 
-    <WebView
+    <!--<WebView
         android:id="@+id/webview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        />
+        />-->
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/trio_dark"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/list_row_selector"
+        android:dividerHeight="1dp" />
 
 
 </RelativeLayout>

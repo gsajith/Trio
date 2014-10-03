@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff" >
+
+    <!-- Thumbnail Image -->
+    <com.volley.adapter.FadingNetworkImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"/>
+
+    <!-- White overlay -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#ccffffff"
+        android:layout_gravity="bottom"/>
+
+    <!-- Movie Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="22sp"
+        android:textColor="#444444"
+        android:textStyle="bold"
+        android:layout_gravity="left|bottom"
+        android:paddingBottom="45dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="90dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#dd333333"
+        android:text="$85"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:maxLines="1"
+        android:ellipsize="marquee"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="13dp"
+        android:layout_marginBottom="8dp">
+        <ImageView
+            android:id="@+id/location_icon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/locationicon"
+            android:layout_marginTop="3dp"/>
+        <TextView
+            android:id="@+id/location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#777777"
+            android:text="The Fox Theatre, Oakland, CA"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/location_icon"/>
+        <ImageView
+            android:id="@+id/time_icon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/timeicon"
+            android:layout_marginTop="7dp"
+            android:layout_below="@id/location_icon"/>
+        <TextView
+            android:id="@+id/time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#777777"
+            android:text="Friday October 17, 2014 - 7:30PM"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/time_icon"
+            android:layout_below="@id/location_text"/>
+        </RelativeLayout>
+
+    <!-- Rating -->
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:paddingBottom="40dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp"
+        android:textSize="0dp" />
+
+    <!-- Genre -->
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#00ff00"
+        android:textSize="0dp"
+        android:layout_gravity="left|bottom"
+        android:paddingBottom="30dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp" />
+
+    <!-- Release Year -->
+    <TextView
+        android:id="@+id/releaseYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#0000ff"
+        android:textSize="0dp"
+        android:layout_gravity="left|bottom"
+        android:paddingBottom="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp"/>
+
+</FrameLayout>
