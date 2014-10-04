@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
@@ -23,20 +24,24 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     private CustomListAdapter adapter;
     private String url;
     private int currentPage;
+    private float VELOCITY_SCALE_FACTOR = 0.5f;
 
     public EndlessListView(Context context) {
         super(context);
         this.setOnScrollListener(this);
+        this.setVelocityScale(VELOCITY_SCALE_FACTOR);
     }
 
     public EndlessListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.setOnScrollListener(this);
+        this.setVelocityScale(VELOCITY_SCALE_FACTOR);
     }
 
     public EndlessListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.setOnScrollListener(this);
+        this.setVelocityScale(VELOCITY_SCALE_FACTOR);
     }
 
     public void setUrl(String url) {
