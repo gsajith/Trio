@@ -94,7 +94,15 @@ public class ListViewFragment extends ListFragment {
                                 movie.setTime(obj.getString("datetime_local"));
                                 movie.setPrice(obj.getString("score"));
                                 JSONObject venue = obj.getJSONObject("venue");
-                                movie.setLocation(venue.getString("name"));
+
+                                String stage = venue.getString("name");
+                                String address = venue.getString("extended_address");
+                                String location = stage + ", " + address;
+
+
+
+
+                                movie.setLocation(location);
                                 /*ArrayList<String> genre = new ArrayList<String>();
                                 movie.setGenre(genre);*/
                                 movieList.add(movie);
