@@ -84,13 +84,17 @@ public class ListViewFragment extends ListFragment {
                                 JSONObject obj = eventArry.getJSONObject(i);
                                 Movie movie = new Movie();
                                 movie.setTitle(obj.getString("title"));
-                                //movie.setThumbnailUrl(obj.getString("image"));
+                                JSONArray performers = obj.getJSONArray("performers");
+                                JSONObject performer1 = performers.getJSONObject(0);
+
+                                movie.setThumbnailUrl(performer1.getString("image"));
                                 //movie.setRating(((Number) obj.get("score"))
                                 //       .doubleValue());
                                 //movie.setYear(obj.getInt("releaseYear"));
-                                movie.setTime(obj.getString("announce_date"));
+                                movie.setTime(obj.getString("datetime_local"));
                                 movie.setPrice(obj.getString("score"));
-                                movie.setLocation(obj.getString("short_title"));
+                                JSONObject venue = obj.getJSONObject("venue");
+                                movie.setLocation(venue.getString("name"));
                                 /*ArrayList<String> genre = new ArrayList<String>();
                                 movie.setGenre(genre);*/
                                 movieList.add(movie);
