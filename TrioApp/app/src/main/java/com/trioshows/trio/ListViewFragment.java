@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.volley.adapter.CustomListAdapter;
 import com.volley.app.AppController;
 import com.volley.model.Movie;
@@ -38,14 +38,16 @@ public class ListViewFragment extends ListFragment {
     // Log tag
     private static final String TAG = ListViewFragment.class.getSimpleName();
     // Movies json url
-    private static final String url = "http://api.androidhive.info/json/movies.json";
+    private String url = "http://api.seatgeek.com/2/events/";
     private ProgressDialog pDialog;
     private List<Movie> movieList = new ArrayList<Movie>();
     private ListView listView;
     private CustomListAdapter adapter;
 
+
     public ListViewFragment() {
     }
+
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -58,74 +60,50 @@ public class ListViewFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.list_fragment, container, false);
-        /*WebView myWebView = (WebView) rootView.findViewById(R.id.webview);
-        myWebView.loadUrl("http://www.trioshows.com");
-
-        myWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });*/
-
         listView = (ListView) rootView.findViewById(android.R.id.list);
-
         adapter = new CustomListAdapter(this.getActivity(), movieList);
         listView.setAdapter(adapter);
-
         pDialog = new ProgressDialog(this.getActivity());
         // Showing progress dialog before making http request
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        // Creating volley request obj
-        JsonArrayRequest movieReq = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+
+        JsonObjectRequest movieReq = new JsonObjectRequest(
+                url, null,
+                new Response.Listener<JSONObject>() {
+
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         hidePDialog();
 
-                        // Parsing json
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-
-                                JSONObject obj = response.getJSONObject(i);
+                        try {
+                            JSONArray eventArry = response.getJSONArray("events");
+                            for (int i = 0; i < eventArry.length(); i++) {
+                                JSONObject obj = eventArry.getJSONObject(i);
                                 Movie movie = new Movie();
                                 movie.setTitle(obj.getString("title"));
-                                movie.setThumbnailUrl(obj.getString("image"));
-                                movie.setRating(((Number) obj.get("rating"))
-                                        .doubleValue());
-                                movie.setYear(obj.getInt("releaseYear"));
-
-                                // Genre is json array
-                                JSONArray genreArry = obj.getJSONArray("genre");
+                                //movie.setThumbnailUrl(obj.getString("image"));
+                                //movie.setRating(((Number) obj.get("score"))
+                                //       .doubleValue());
+                                //movie.setYear(obj.getInt("releaseYear"));
                                 ArrayList<String> genre = new ArrayList<String>();
-                                for (int j = 0; j < genreArry.length(); j++) {
-                                    genre.add((String) genreArry.get(j));
-                                }
                                 movie.setGenre(genre);
-
-                                // adding movie to movies array
                                 movieList.add(movie);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                        // notifying list adapter about data changes
-                        // so that it renders the list view with updated data
-                        adapter.notifyDataSetChanged();
                     }
                 }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                hidePDialog();
-
+                // hide the progress dialog
+                pDialog.hide();
             }
         });
 
@@ -134,11 +112,13 @@ public class ListViewFragment extends ListFragment {
         return rootView;
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         hidePDialog();
     }
+
 
     private void hidePDialog() {
         if (pDialog != null) {

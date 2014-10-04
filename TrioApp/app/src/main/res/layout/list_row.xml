@@ -34,6 +34,7 @@
         android:paddingRight="0dp"/>
 
     <TextView
+        android:id = "@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:gravity="center"
@@ -42,7 +43,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:background="#dd333333"
-        android:text="$85"
+
         android:textStyle="bold"
         android:textSize="25sp"
         android:textColor="#ffffff"
@@ -58,14 +59,13 @@
             android:id="@+id/location_icon"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:src="@drawable/locationicon"
-            android:layout_marginTop="3dp"/>
-        <TextView
-            android:id="@+id/location_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#777777"
-            android:text="The Fox Theatre, Oakland, CA"
+        android:src="@drawable/locationicon"
+        android:layout_marginTop="3dp"/>
+    <TextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#777777"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/location_icon"/>
         <ImageView
@@ -80,7 +80,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#777777"
-            android:text="Friday October 17, 2014 - 7:30PM"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/time_icon"
             android:layout_below="@id/location_text"/>

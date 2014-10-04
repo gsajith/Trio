@@ -57,9 +57,12 @@ public class CustomListAdapter extends BaseAdapter {
         FadingNetworkImageView thumbNail = (FadingNetworkImageView) convertView
                 .findViewById(R.id.thumbnail);
         TextView title = (TextView) convertView.findViewById(R.id.title);
-        TextView rating = (TextView) convertView.findViewById(R.id.rating);
-        TextView genre = (TextView) convertView.findViewById(R.id.genre);
-        TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
+        //TextView rating = (TextView) convertView.findViewById(R.id.rating);
+        TextView price = (TextView) convertView.findViewById(R.id.price);
+        TextView location_text = (TextView) convertView.findViewById(R.id.location_text);
+        TextView time_text = (TextView) convertView.findViewById(R.id.time_text);
+        //TextView genre = (TextView) convertView.findViewById(R.id.genre);
+        //TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
 
         // getting movie data for the row
         Movie m = movieItems.get(position);
@@ -71,19 +74,19 @@ public class CustomListAdapter extends BaseAdapter {
         title.setText(m.getTitle());
 
         // rating
-        rating.setText("Rating: " + String.valueOf(m.getRating()));
+        //rating.setText("Rating: " + String.valueOf(m.getRating()));
 
         // genre
         String genreStr = "";
         for (String str : m.getGenre()) {
             genreStr += str + ", ";
         }
-        genreStr = genreStr.length() > 0 ? genreStr.substring(0,
+        /*genreStr = genreStr.length() > 0 ? genreStr.substring(0,
                 genreStr.length() - 2) : genreStr;
-        genre.setText(genreStr);
+        genre.setText(genreStr);*/
 
         // release year
-        year.setText(String.valueOf(m.getYear()));
+        //year.setText(String.valueOf(m.getYear()));
 
         return convertView;
     }
