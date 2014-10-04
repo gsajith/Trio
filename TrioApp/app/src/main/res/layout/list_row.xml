@@ -31,7 +31,7 @@
         android:layout_gravity="left|bottom"
         android:paddingBottom="45dp"
         android:paddingLeft="10dp"
-        android:paddingRight="0dp"/>
+        android:paddingRight="10dp"/>
 
     <TextView
         android:id = "@+id/price"

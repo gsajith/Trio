@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,10 +68,9 @@ public class CustomListAdapter extends BaseAdapter {
 
         // getting movie data for the row
         Movie m = movieItems.get(position);
-
-        // thumbnail image
-        thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
-
+            thumbNail.setBackground(activity.getResources().getDrawable(R.drawable.placeholder));
+            // thumbnail image
+            thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
         // title
         title.setText(m.getTitle());
 
