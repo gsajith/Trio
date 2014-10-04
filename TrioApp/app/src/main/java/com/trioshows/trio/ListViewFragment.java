@@ -35,7 +35,7 @@ public class ListViewFragment extends ListFragment {
     // Log tag
     private static final String TAG = ListViewFragment.class.getSimpleName();
     // Events json url
-    private String url = "http://api.seatgeek.com/2/events?venue.state=MI";
+    private String url = "http://api.seatgeek.com/2/events?venue.state=MI&listing_count.gt=0";
     private ProgressDialog pDialog;
     private List<Event> eventList = new ArrayList<Event>();
     private ListView listView;
@@ -83,6 +83,13 @@ public class ListViewFragment extends ListFragment {
                                 JSONObject obj = eventArry.getJSONObject(i);
                                 Event event = new Event();
                                 event.setTitle(obj.getString("title"));
+
+                                JSONObject avePrice = obj.getJSONObject("stats");
+
+                                float neatStringF = Float.parseFloat(avePrice.getString("average_price"));
+                                String neatStringD = String.format("%.2f", neatStringF);
+                                String neatPrice = "$" + neatStringD;
+                                event.setPrice(neatPrice);
                                 JSONArray performers = obj.getJSONArray("performers");
                                 JSONObject performer1 = performers.getJSONObject(0);
 
