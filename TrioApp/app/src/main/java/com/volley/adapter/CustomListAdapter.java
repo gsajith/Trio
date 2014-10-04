@@ -1,7 +1,5 @@
 package com.volley.adapter;
 
-
-import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -16,6 +14,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.trioshows.trio.R;
 import com.volley.app.AppController;
 import com.volley.model.Event;
+import com.volley.util.FadingNetworkImageView;
 
 public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
@@ -26,6 +25,10 @@ public class CustomListAdapter extends BaseAdapter {
     public CustomListAdapter(Activity activity, List<Event> eventItems) {
         this.activity = activity;
         this.eventItems = eventItems;
+    }
+
+    public void addAll(List<Event> newEvents) {
+        eventItems.addAll(newEvents);
     }
 
     @Override

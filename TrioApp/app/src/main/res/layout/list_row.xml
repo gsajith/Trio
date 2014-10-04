@@ -5,7 +5,7 @@
     android:background="#ffffff" >
 
     <!-- Thumbnail Image -->
-    <com.volley.adapter.FadingNetworkImageView
+    <com.volley.util.FadingNetworkImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="300dp"

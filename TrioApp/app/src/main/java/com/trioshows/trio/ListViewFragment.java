@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.volley.adapter.CustomListAdapter;
 import com.volley.app.AppController;
 import com.volley.model.Event;
+import com.volley.util.EndlessListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,14 +32,15 @@ import java.util.List;
 
 import java.text.DateFormatSymbols;
 
-public class ListViewFragment extends ListFragment {
+public class ListViewFragment extends ListFragment implements EndlessListView.EndlessListener{
     // Log tag
     private static final String TAG = ListViewFragment.class.getSimpleName();
     // Events json url
-    private String url = "http://api.seatgeek.com/2/events?venue.state=MI&listing_count.gt=0";
+    private String url = "http://api.seatgeek.com/2/events?venue.state=MI&listing_count.gt=0&per_page=10";
+    private int current_page = 1;
     private ProgressDialog pDialog;
     private List<Event> eventList = new ArrayList<Event>();
-    private ListView listView;
+    private EndlessListView listView;
     private CustomListAdapter adapter;
 
 
@@ -59,15 +61,24 @@ public class ListViewFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.list_fragment, container, false);
-        listView = (ListView) rootView.findViewById(android.R.id.list);
+        listView = (EndlessListView) rootView.findViewById(android.R.id.list);
+        listView.setLoadingView(R.layout.loading_layout);
         adapter = new CustomListAdapter(this.getActivity(), eventList);
+        listView.setUrl(url);
+        listView.setCurrentPage(current_page);
         listView.setAdapter(adapter);
+        listView.setListener(this);
         pDialog = new ProgressDialog(this.getActivity());
         // Showing progress dialog before making http request
         pDialog.setMessage("Loading...");
         pDialog.show();
 
 
+        makeJSONRequest(url + "&page=" + current_page);
+        return rootView;
+    }
+
+    private void makeJSONRequest(String url) {
         JsonObjectRequest eventReq = new JsonObjectRequest(
                 url, null,
                 new Response.Listener<JSONObject>() {
@@ -76,7 +87,7 @@ public class ListViewFragment extends ListFragment {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         hidePDialog();
-
+                        List<Event> tempEventList = new ArrayList<Event>();
                         try {
                             JSONArray eventArry = response.getJSONArray("events");
                             for (int i = 0; i < eventArry.length(); i++) {
@@ -119,9 +130,8 @@ public class ListViewFragment extends ListFragment {
                                 String location = stage + ", " + address;
 
                                 event.setLocation(location);
-                                eventList.add(event);
+                                tempEventList.add(event);
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (ParseException e) {
@@ -129,7 +139,7 @@ public class ListViewFragment extends ListFragment {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        adapter.notifyDataSetChanged();
+                        listView.addNewData(tempEventList);
                     }
                 }, new Response.ErrorListener() {
 
@@ -143,7 +153,6 @@ public class ListViewFragment extends ListFragment {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(eventReq);
-        return rootView;
     }
 
 
@@ -159,5 +168,10 @@ public class ListViewFragment extends ListFragment {
             pDialog.dismiss();
             pDialog = null;
         }
+    }
+
+    @Override
+    public void loadData(String url) {
+        makeJSONRequest(url);
     }
 }
