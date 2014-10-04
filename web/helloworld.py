@@ -1,3 +1,4 @@
+from cyclone import template
 import cyclone.web
 import sys
 
@@ -7,7 +8,8 @@ from twisted.python import log
 
 class MainHandler(cyclone.web.RequestHandler):
     def get(self):
-        self.write("Hello, world")
+        l = template.Loader("templates")
+        self.write(l.load("test.html").generate())
 
 
 if __name__ == "__main__":
