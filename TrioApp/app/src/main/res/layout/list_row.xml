@@ -89,39 +89,4 @@
             android:layout_below="@id/location_text"/>
         </RelativeLayout>
 
-    <!-- Rating -->
-    <TextView
-        android:id="@+id/rating"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|bottom"
-        android:paddingBottom="40dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="0dp"
-        android:textSize="0dp" />
-
-    <!-- Genre -->
-    <TextView
-        android:id="@+id/genre"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#00ff00"
-        android:textSize="0dp"
-        android:layout_gravity="left|bottom"
-        android:paddingBottom="30dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="0dp" />
-
-    <!-- Release Year -->
-    <TextView
-        android:id="@+id/releaseYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#0000ff"
-        android:textSize="0dp"
-        android:layout_gravity="left|bottom"
-        android:paddingBottom="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="0dp"/>
-
 </FrameLayout>

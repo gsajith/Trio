@@ -112,15 +112,11 @@ public class ListViewFragment extends ListFragment {
                                     neatTime += ", " + f2.format(d);;
                                 }
                                 event.setTime(neatTime);
-                                event.setPrice(obj.getString("score"));
                                 JSONObject venue = obj.getJSONObject("venue");
 
                                 String stage = venue.getString("name");
                                 String address = venue.getString("extended_address");
                                 String location = stage + ", " + address;
-
-
-
 
                                 event.setLocation(location);
                                 eventList.add(event);

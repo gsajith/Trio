@@ -57,12 +57,9 @@ public class CustomListAdapter extends BaseAdapter {
         FadingNetworkImageView thumbNail = (FadingNetworkImageView) convertView
                 .findViewById(R.id.thumbnail);
         TextView title = (TextView) convertView.findViewById(R.id.title);
-        //TextView rating = (TextView) convertView.findViewById(R.id.rating);
         TextView price = (TextView) convertView.findViewById(R.id.price);
         TextView location_text = (TextView) convertView.findViewById(R.id.location_text);
         TextView time_text = (TextView) convertView.findViewById(R.id.time_text);
-        //TextView genre = (TextView) convertView.findViewById(R.id.genre);
-        //TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
 
         // getting movie data for the row
         Event m = eventItems.get(position);
