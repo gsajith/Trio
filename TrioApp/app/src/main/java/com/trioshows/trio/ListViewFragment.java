@@ -40,7 +40,7 @@ public class ListViewFragment extends ListFragment {
     // Log tag
     private static final String TAG = ListViewFragment.class.getSimpleName();
     // Movies json url
-    private String url = "http://api.seatgeek.com/2/events/";
+    private String url = "http://api.seatgeek.com/2/events?listing_count.gt=0";
     private ProgressDialog pDialog;
     private List<Movie> movieList = new ArrayList<Movie>();
     private ListView listView;
@@ -87,7 +87,18 @@ public class ListViewFragment extends ListFragment {
                             for (int i = 0; i < eventArry.length(); i++) {
                                 JSONObject obj = eventArry.getJSONObject(i);
                                 Movie movie = new Movie();
+
+
                                 movie.setTitle(obj.getString("title"));
+
+                                JSONObject avePrice = obj.getJSONObject("stats");
+
+
+                                float neatStringF = Float.parseFloat(avePrice.getString("average_price"));
+                                String neatStringD = String.format("%.2f", neatStringF);
+                                String neatPrice = "$" + neatStringD;
+                                movie.setPrice(neatPrice);
+
                                 JSONArray performers = obj.getJSONArray("performers");
                                 JSONObject performer1 = performers.getJSONObject(0);
 
@@ -105,7 +116,7 @@ public class ListViewFragment extends ListFragment {
 
                                 String neatTime = monthName + " " + parsedTime[2] +", " + parsedTime[0];
                                 movie.setTime(neatTime);
-                                movie.setPrice(obj.getString("score"));
+
                                 JSONObject venue = obj.getJSONObject("venue");
 
                                 String stage = venue.getString("name");
