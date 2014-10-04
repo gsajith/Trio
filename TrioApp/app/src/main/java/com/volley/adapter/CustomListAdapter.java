@@ -73,15 +73,28 @@ public class CustomListAdapter extends BaseAdapter {
         // title
         title.setText(m.getTitle());
 
+        // time
+        time_text.setText(m.getTime());
+
+        //price
+
+        price.setText(m.getPrice());
+
+        //location
+
+        location_text.setText(m.getLocation());
+
+
+
         // rating
         //rating.setText("Rating: " + String.valueOf(m.getRating()));
 
         // genre
-        String genreStr = "";
+        /*String genreStr = "";
         for (String str : m.getGenre()) {
             genreStr += str + ", ";
         }
-        /*genreStr = genreStr.length() > 0 ? genreStr.substring(0,
+        genreStr = genreStr.length() > 0 ? genreStr.substring(0,
                 genreStr.length() - 2) : genreStr;
         genre.setText(genreStr);*/
 

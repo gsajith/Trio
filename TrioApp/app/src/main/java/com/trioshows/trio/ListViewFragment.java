@@ -88,8 +88,11 @@ public class ListViewFragment extends ListFragment {
                                 //movie.setRating(((Number) obj.get("score"))
                                 //       .doubleValue());
                                 //movie.setYear(obj.getInt("releaseYear"));
-                                ArrayList<String> genre = new ArrayList<String>();
-                                movie.setGenre(genre);
+                                movie.setTime(obj.getString("announce_date"));
+                                movie.setPrice(obj.getString("score"));
+                                movie.setLocation(obj.getString("short_title"));
+                                /*ArrayList<String> genre = new ArrayList<String>();
+                                movie.setGenre(genre);*/
                                 movieList.add(movie);
                             }
 

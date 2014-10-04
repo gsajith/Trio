@@ -4,20 +4,26 @@ import java.util.ArrayList;
 
 public class Movie {
     private String title, thumbnailUrl;
-    private int year;
-    private double rating;
-    private ArrayList<String> genre;
+    //private int year;
+    //private double rating;
+    //private ArrayList<String> genre;
+    private String price;
+    private String location;
+    private String time;
 
     public Movie() {
     }
 
-    public Movie(String name, String thumbnailUrl, int year, double rating,
-                 ArrayList<String> genre) {
+    public Movie(String name, String thumbnailUrl, /*int year, double rating,
+                 ArrayList<String> genre*/String price, String location, String time) {
         this.title = name;
         this.thumbnailUrl = thumbnailUrl;
-        this.year = year;
-        this.rating = rating;
-        this.genre = genre;
+        //this.year = year;
+        //this.rating = rating;
+        //this.genre = genre;
+        this.price = price;
+        this.location = location;
+        this.time = time;
     }
 
     public String getTitle() {
@@ -36,7 +42,31 @@ public class Movie {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public int getYear() {
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /*public int getYear() {
         return year;
     }
 
@@ -58,6 +88,6 @@ public class Movie {
 
     public void setGenre(ArrayList<String> genre) {
         this.genre = genre;
-    }
+    }*/
 
 }
