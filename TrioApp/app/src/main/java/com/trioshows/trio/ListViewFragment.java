@@ -34,6 +34,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.text.DateFormatSymbols;
+
 public class ListViewFragment extends ListFragment {
     // Log tag
     private static final String TAG = ListViewFragment.class.getSimpleName();
@@ -43,6 +45,8 @@ public class ListViewFragment extends ListFragment {
     private List<Movie> movieList = new ArrayList<Movie>();
     private ListView listView;
     private CustomListAdapter adapter;
+
+
 
 
     public ListViewFragment() {
@@ -91,7 +95,16 @@ public class ListViewFragment extends ListFragment {
                                 //movie.setRating(((Number) obj.get("score"))
                                 //       .doubleValue());
                                 //movie.setYear(obj.getInt("releaseYear"));
-                                movie.setTime(obj.getString("datetime_local"));
+                                String unparsedTime = obj.getString("datetime_local");
+                                String delims = "[-, T]+";
+
+
+                                String[] parsedTime = unparsedTime.split(delims);
+
+                                String monthName = new DateFormatSymbols().getMonths()[Integer.parseInt(parsedTime[1])-1];
+
+                                String neatTime = monthName + " " + parsedTime[2] +", " + parsedTime[0];
+                                movie.setTime(neatTime);
                                 movie.setPrice(obj.getString("score"));
                                 JSONObject venue = obj.getJSONObject("venue");
 
