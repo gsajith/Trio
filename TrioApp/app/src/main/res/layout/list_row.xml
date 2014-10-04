@@ -18,7 +18,7 @@
         android:background="#ccffffff"
         android:layout_gravity="bottom"/>
 
-    <!-- Movie Title -->
+    <!-- Event Title -->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -66,6 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#777777"
+        android:maxLines="1"
+        android:ellipsize="end"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/location_icon"/>
         <ImageView
@@ -80,6 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#777777"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/time_icon"
             android:layout_below="@id/location_text"/>

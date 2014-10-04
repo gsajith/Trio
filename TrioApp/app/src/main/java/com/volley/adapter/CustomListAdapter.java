@@ -1,12 +1,11 @@
 package com.volley.adapter;
 
 
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,30 +13,29 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.trioshows.trio.R;
 import com.volley.app.AppController;
-import com.volley.model.Movie;
+import com.volley.model.Event;
 
 public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<Movie> movieItems;
+    private List<Event> eventItems;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter(Activity activity, List<Movie> movieItems) {
+    public CustomListAdapter(Activity activity, List<Event> eventItems) {
         this.activity = activity;
-        this.movieItems = movieItems;
+        this.eventItems = eventItems;
     }
 
     @Override
     public int getCount() {
-        return movieItems.size();
+        return eventItems.size();
     }
 
     @Override
     public Object getItem(int location) {
-        return movieItems.get(location);
+        return eventItems.get(location);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class CustomListAdapter extends BaseAdapter {
         //TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
 
         // getting movie data for the row
-        Movie m = movieItems.get(position);
+        Event m = eventItems.get(position);
         // thumbnail image
         if (m.getThumbnailUrl() == null || m.getThumbnailUrl().equals("null")) {
             thumbNail.setBackground(activity.getResources().getDrawable(R.drawable.placeholder));

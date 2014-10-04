@@ -2,7 +2,7 @@ package com.volley.model;
 
 import java.util.ArrayList;
 
-public class Movie {
+public class Event {
     private String title, thumbnailUrl;
     //private int year;
     //private double rating;
@@ -11,10 +11,10 @@ public class Movie {
     private String location;
     private String time;
 
-    public Movie() {
+    public Event() {
     }
 
-    public Movie(String name, String thumbnailUrl, /*int year, double rating,
+    public Event(String name, String thumbnailUrl, /*int year, double rating,
                  ArrayList<String> genre*/String price, String location, String time) {
         this.title = name;
         this.thumbnailUrl = thumbnailUrl;
