@@ -19,6 +19,10 @@ import java.util.Random;
  */
 public class FadingNetworkImageView extends NetworkImageView{
     private static final int FADE_TIME_IN_MS = 200;
+    private boolean measured = false;
+    private boolean needsToShrink = false;
+    private boolean shrinked = false;
+    private boolean needsToUnshrink = false;
 
     public FadingNetworkImageView(Context context) {
         super(context);
@@ -40,13 +44,42 @@ public class FadingNetworkImageView extends NetworkImageView{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        measured = true;
         int w = this.getMeasuredWidth();
-
-
-        setMeasuredDimension(w, w);
+        if (needsToShrink || shrinked) {
+            needsToShrink = false;
+            shrinked = true;
+            setMeasuredDimension(w, w/2);
+        } else if (needsToUnshrink || !shrinked) {
+            needsToUnshrink = false;
+            shrinked = false;
+            setMeasuredDimension(w, w);
+        } else {
+            setMeasuredDimension(w, w);
+        }
 
     }
 
+    public void unshrink() {
+        if (measured) {
+            int w = this.getMeasuredWidth();
+            setMeasuredDimension(w, w);
+            shrinked = false;
+        } else {
+            needsToUnshrink = true;
+            needsToShrink = false;
+        }
+    }
+    public void shrink() {
+        if (measured) {
+            int w = this.getMeasuredWidth();
+            setMeasuredDimension(w, w/2);
+            shrinked = true;
+        } else {
+            needsToShrink = true;
+            needsToUnshrink = false;
+        }
+    }
     public FadingNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         Random random = new Random();

@@ -68,9 +68,16 @@ public class CustomListAdapter extends BaseAdapter {
 
         // getting movie data for the row
         Movie m = movieItems.get(position);
+        // thumbnail image
+        if (m.getThumbnailUrl() == null || m.getThumbnailUrl().equals("null")) {
             thumbNail.setBackground(activity.getResources().getDrawable(R.drawable.placeholder));
-            // thumbnail image
-            thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+            thumbNail.shrink();
+        } else {
+            thumbNail.setBackground(null);
+            thumbNail.unshrink();
+        }
+
+        thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
         // title
         title.setText(m.getTitle());
 
