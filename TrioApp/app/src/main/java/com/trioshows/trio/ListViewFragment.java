@@ -133,6 +133,7 @@ public class ListViewFragment extends ListFragment {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        adapter.notifyDataSetChanged();
                     }
                 }, new Response.ErrorListener() {
 
