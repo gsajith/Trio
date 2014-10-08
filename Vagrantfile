@@ -20,5 +20,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.provision "file", source: ".vagrant/bashrc", destination: "/home/vagrant/.bashrc"
   config.vm.provision "shell", path: ".vagrant/provision.sh"
   config.vm.hostname = "trio.test"
-  config.vm.network "private_network", ip: "192.168.77.77"
+  config.vm.network "private_network", ip: "192.168.56.77"
 end
