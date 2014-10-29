@@ -1,3 +1,3 @@
 
-def show_cake():
-    print "There is no cake"
+def update():
+    print "Upgrading to schema 1"
