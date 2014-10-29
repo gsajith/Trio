@@ -61,6 +61,7 @@ public class CustomListAdapter extends BaseAdapter {
                 .findViewById(R.id.thumbnail);
         TextView title = (TextView) convertView.findViewById(R.id.title);
         TextView price = (TextView) convertView.findViewById(R.id.price);
+        TextView id = (TextView) convertView.findViewById(R.id.id);
         TextView location_text = (TextView) convertView.findViewById(R.id.location_text);
         TextView time_text = (TextView) convertView.findViewById(R.id.time_text);
 
@@ -74,6 +75,8 @@ public class CustomListAdapter extends BaseAdapter {
             thumbNail.setBackground(null);
             thumbNail.unshrink();
         }
+
+        id.setText(m.getId());
 
         thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
         // title

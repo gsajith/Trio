@@ -2,22 +2,26 @@ package com.trioshows.trio;
 
 import android.app.ListFragment;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.database.handler.DatabaseHandler;
 import com.volley.adapter.CustomListAdapter;
 import com.volley.app.AppController;
 import com.volley.model.Event;
 import com.volley.util.EndlessListView;
+import com.volley.util.FadingNetworkImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +37,7 @@ import java.util.List;
 import java.text.DateFormatSymbols;
 
 public class ListViewFragment extends ListFragment implements EndlessListView.EndlessListener{
+    public static final String PREFS_NAME = "TrioApp";
     // Log tag
     private static final String TAG = ListViewFragment.class.getSimpleName();
     // Events json url
@@ -52,8 +57,24 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Toast.makeText(getActivity(), "You clicked something at " + position + " and id " + id,
-                Toast.LENGTH_SHORT).show();
+        FadingNetworkImageView img = (FadingNetworkImageView) v.findViewById(R.id.thumbnail);
+        DatabaseHandler db = new DatabaseHandler(this.getActivity());
+        String idnum = ((TextView) v.findViewById(R.id.id)).getText().toString();
+        String title = ((TextView) v.findViewById(R.id.title)).getText().toString();
+        String url = img.getUrl();
+        String price = ((TextView) v.findViewById(R.id.price)).getText().toString();
+        String location_text = ((TextView) v.findViewById(R.id.location_text)).getText().toString();
+        String time_text = ((TextView) v.findViewById(R.id.time_text)).getText().toString();
+        Event event = new Event(title, url, price, location_text, time_text, idnum);
+        if (db.getEvent(idnum) != null) {
+            db.deleteEvent(event);
+            Toast.makeText(getActivity(), "You unsaved " + title + " " + idnum,
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            db.addEvent(event);
+            Toast.makeText(getActivity(), "You saved " + title + " " + idnum,
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -94,6 +115,7 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
                                 JSONObject obj = eventArry.getJSONObject(i);
                                 Event event = new Event();
                                 event.setTitle(obj.getString("title"));
+                                event.setId(obj.getString("id"));
 
                                 JSONObject avePrice = obj.getJSONObject("stats");
 

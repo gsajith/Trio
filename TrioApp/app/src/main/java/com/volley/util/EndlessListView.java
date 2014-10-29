@@ -104,6 +104,7 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
 
     public void doneLoading() {
         isLoading = false;
+        this.removeFooterView(loading_view);
     }
 
     public void setListener(EndlessListener listener) {
