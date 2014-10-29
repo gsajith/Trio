@@ -2,22 +2,26 @@ package com.trioshows.trio;
 
 import android.app.ListFragment;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.database.handler.DatabaseHandler;
 import com.volley.adapter.CustomListAdapter;
 import com.volley.app.AppController;
 import com.volley.model.Event;
 import com.volley.util.EndlessListView;
+import com.volley.util.FadingNetworkImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +36,16 @@ import java.util.List;
 
 import java.text.DateFormatSymbols;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+import android.view.View.OnClickListener;
+
 public class ListViewFragment extends ListFragment implements EndlessListView.EndlessListener{
+    public static final String PREFS_NAME = "TrioApp";
     // Log tag
     private static final String TAG = ListViewFragment.class.getSimpleName();
     // Events json url
@@ -52,8 +65,16 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Toast.makeText(getActivity(), "You clicked something at " + position + " and id " + id,
-                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), DetailPageActivity.class);
+        intent.putExtra("title", eventList.get(position).getTitle());
+        intent.putExtra("listingCount", eventList.get(position).getListingCount());
+        intent.putExtra("location", eventList.get(position).getLocation());
+        intent.putExtra("popularity", eventList.get(position).getPopularity());
+        intent.putExtra("price", eventList.get(position).getPrice());
+        intent.putExtra("thumbnailUrl", eventList.get(position).getThumbnailUrl());
+        intent.putExtra("time", eventList.get(position).getTime());
+        intent.putExtra("ticketUrl", eventList.get(position).getTicketURL());
+        startActivity(intent);
     }
 
     @Override
@@ -94,13 +115,14 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
                                 JSONObject obj = eventArry.getJSONObject(i);
                                 Event event = new Event();
                                 event.setTitle(obj.getString("title"));
+                                event.setId(obj.getString("id"));
 
                                 JSONObject avePrice = obj.getJSONObject("stats");
 
                                 float neatStringF = Float.parseFloat(avePrice.getString("average_price"));
                                 String neatStringD = String.format("%.2f", neatStringF);
                                 String neatPrice = "$" + neatStringD;
-                                event.setPrice(neatPrice);
+                                event.setPrice(neatPrice);////////////////
                                 JSONArray performers = obj.getJSONArray("performers");
                                 JSONObject performer1 = performers.getJSONObject(0);
 
@@ -122,14 +144,20 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
                                     DateFormat f2 = new SimpleDateFormat("h:mma");
                                     neatTime += ", " + f2.format(d);;
                                 }
-                                event.setTime(neatTime);
+                                event.setTime(neatTime);///////////
                                 JSONObject venue = obj.getJSONObject("venue");
-
                                 String stage = venue.getString("name");
                                 String address = venue.getString("extended_address");
                                 String location = stage + ", " + address;
 
-                                event.setLocation(location);
+                                event.setLocation(location);/////////////
+
+                                JSONObject stats = obj.getJSONObject("stats");
+                                String listingCount = stats.getString("listing_count");
+                                event.setListingCount(listingCount);
+                                event.setTicketURL(obj.getString("url"));
+                                event.setPopularity(obj.getString("score"));
+
                                 tempEventList.add(event);
                             }
                         } catch (JSONException e) {

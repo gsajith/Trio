@@ -8,7 +8,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.trioshows.trio.R;
 
@@ -23,6 +25,7 @@ public class FadingNetworkImageView extends NetworkImageView{
     private boolean needsToShrink = false;
     private boolean shrinked = false;
     private boolean needsToUnshrink = false;
+    private String mUrl = "";
 
     public FadingNetworkImageView(Context context) {
         super(context);
@@ -39,6 +42,16 @@ public class FadingNetworkImageView extends NetworkImageView{
         r += 100;
         setBackgroundColor(Color.rgb(r, r, r));
 
+    }
+
+    @Override
+    public void setImageUrl(String url, ImageLoader imageLoader) {
+        super.setImageUrl(url, imageLoader);
+        mUrl = url;
+    }
+
+    public String getUrl() {
+        return mUrl;
     }
 
     @Override

@@ -48,7 +48,6 @@
         android:textColor="#ffffff"
         android:maxLines="1"
         android:ellipsize="marquee"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,14 +93,5 @@
         android:layout_height="0dp"
         android:visibility="gone"
         />
-
-    <ImageView
-        android:id="@+id/save"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/hearticon"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_gravity="right|top"/>
 
 </FrameLayout>

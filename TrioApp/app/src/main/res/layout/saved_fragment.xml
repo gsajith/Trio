@@ -18,5 +18,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
+    <com.volley.util.EndlessListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/trio_dark"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/list_row_selector"
+        android:dividerHeight="1dp" />
 
 </RelativeLayout>
