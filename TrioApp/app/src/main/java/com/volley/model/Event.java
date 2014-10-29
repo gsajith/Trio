@@ -12,10 +12,22 @@ public class Event {
     private String time;
     private String id;
 
+    private String listingCount;
+    private String ticketURL;
+    private String popularity;
+
     public Event() {
     }
 
-    public Event(String name, String thumbnailUrl, String price, String location, String time, String id) {
+    public Event(String name, String thumbnailUrl, /*int year, double rating,
+                 ArrayList<String> genre*/String price,
+                                          String location,
+                                          String time,
+                                          String id,
+                                          String listingCount,
+                                          String ticketURL,
+                                          String popularity)
+    {
         this.title = name;
         this.thumbnailUrl = thumbnailUrl;
         //this.year = year;
@@ -25,6 +37,9 @@ public class Event {
         this.location = location;
         this.time = time;
         this.id = id;
+        this.listingCount = listingCount;
+        this.ticketURL = ticketURL;
+        this.popularity = popularity;
     }
 
     public String getTitle() {
@@ -74,6 +89,16 @@ public class Event {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getListingCount(){return listingCount;}
+    public void setListingCount(String listingCount){this.listingCount = listingCount;}
+
+    public String getTicketURL(){return ticketURL;}
+    public void setTicketURL(String ticketURL){this.ticketURL = ticketURL;}
+
+    public String getPopularity(){return popularity;}
+    public void setPopularity(String popularity){this.popularity = popularity;}
+
 
     /*public int getYear() {
         return year;

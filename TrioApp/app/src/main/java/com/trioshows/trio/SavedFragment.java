@@ -42,7 +42,10 @@ public class SavedFragment extends ListFragment implements EndlessListView.Endle
         String price = ((TextView) v.findViewById(R.id.price)).getText().toString();
         String location_text = ((TextView) v.findViewById(R.id.location_text)).getText().toString();
         String time_text = ((TextView) v.findViewById(R.id.time_text)).getText().toString();
-        Event event = new Event(title, url, price, location_text, time_text, idnum);
+        Event event = new Event(title, url, price, location_text, time_text, idnum,
+        eventList.get(position).getListingCount(),
+        eventList.get(position).getTicketURL(),
+        eventList.get(position).getPopularity() );
         db.deleteEvent(event);
         Toast.makeText(getActivity(), "You unsaved " + title + " " + idnum,
                 Toast.LENGTH_SHORT).show();
