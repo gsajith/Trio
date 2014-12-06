@@ -1,9 +1,15 @@
 package com.volley.adapter;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.provider.CalendarContract;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +103,7 @@ public class CustomListAdapter extends BaseAdapter {
         location_text.setText(m.getLocation());
 
         ImageView saveButton = (ImageView) convertView.findViewById(R.id.save);
+        ImageView addToCalendarButton = (ImageView) convertView.findViewById(R.id.plus);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -123,6 +130,63 @@ public class CustomListAdapter extends BaseAdapter {
               Toast.makeText(activity, "You saved " + title + " " + idnum,
                 Toast.LENGTH_SHORT).show();
             }
+          }
+        });
+
+        addToCalendarButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Event thisEvent = eventItems.get(position);
+            Calendar cal = Calendar.getInstance();
+            String input = thisEvent.getTime();
+            long timeStart = cal.getTimeInMillis();
+            long timeEnd = cal.getTimeInMillis()+(60*60*1000);
+            String monthString = input.substring(0, input.indexOf(" "));
+            String rest = input.substring(input.indexOf(" ")+1);
+            int day = Integer.parseInt(rest.substring(0, rest.indexOf(",")));
+            rest = rest.substring(rest.indexOf(",")+2);
+            int year = Integer.parseInt(rest.substring(0, rest.indexOf(",")));
+            int mo = monthString.equals("January")? Calendar.JANUARY :
+              monthString.equals("February")? Calendar.FEBRUARY :
+                monthString.equals("March")? Calendar.MARCH :
+                  monthString.equals("April")? Calendar.APRIL :
+                    monthString.equals("May")? Calendar.MAY :
+                      monthString.equals("June")? Calendar.JUNE :
+                        monthString.equals("July")? Calendar.JULY :
+                          monthString.equals("August")? Calendar.AUGUST :
+                            monthString.equals("Septemper")? Calendar.SEPTEMBER :
+                              monthString.equals("October")? Calendar.OCTOBER :
+                                monthString.equals("November")? Calendar.NOVEMBER :
+                                  monthString.equals("December")? Calendar.DECEMBER : 0;
+            Calendar c = Calendar.getInstance();
+            c.set(year, mo, day);
+            long then = c.getTimeInMillis();
+            timeStart = then;
+            timeEnd = then+(60*60*1000);
+            if (!input.contains("Time TBD")) {
+              rest = rest.substring(rest.indexOf(",")+2);
+              int hour = Integer.parseInt(rest.substring(0, rest.indexOf(":")));
+              if (rest.contains("PM")) {
+                hour += 12;
+              }
+              rest = rest.substring(0, rest.length()-2);
+              rest = rest.substring(rest.indexOf(":")+1);
+              int minute = Integer.parseInt(rest);
+              c = Calendar.getInstance();
+              c.set(year, mo, day, hour, minute);
+              then = c.getTimeInMillis();
+              timeStart = then;
+              timeEnd = then+(60*60*1000);
+            }
+            Intent intent = new Intent(Intent.ACTION_EDIT);
+            intent.setType("vnd.android.cursor.item/event");
+            intent.putExtra("beginTime", timeStart);
+            intent.putExtra("allDay", false);
+            intent.putExtra("endTime", timeEnd);
+            intent.putExtra("title", thisEvent.getTitle());
+            intent.putExtra(CalendarContract.Events.EVENT_LOCATION, thisEvent.getLocation());
+            activity.startActivity(intent);
+
           }
         });
 

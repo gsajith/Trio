@@ -99,9 +99,18 @@
         android:id="@+id/save"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/hearticon"
+        android:src="@drawable/staricon"
         android:layout_marginTop="7dp"
         android:layout_marginRight="7dp"
+        android:layout_gravity="right|top"/>
+
+    <ImageView
+        android:id="@+id/plus"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/plusicon"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="57dp"
         android:layout_gravity="right|top"/>
 
 </FrameLayout>
