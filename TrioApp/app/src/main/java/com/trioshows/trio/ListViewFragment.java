@@ -113,7 +113,11 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
                             JSONArray eventArry = response.getJSONArray("events");
                             for (int i = 0; i < eventArry.length(); i++) {
                                 JSONObject obj = eventArry.getJSONObject(i);
+
+                                 if(obj.getString("type").equals("band") || obj.getString("type").equals("concert")){
+
                                 Event event = new Event();
+
                                 event.setTitle(obj.getString("title"));
                                 event.setId(obj.getString("id"));
 
@@ -133,16 +137,17 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
 
                                 String[] parsedTime = unparsedTime.split(delims);
 
-                                String monthName = new DateFormatSymbols().getMonths()[Integer.parseInt(parsedTime[1])-1];
+                                String monthName = new DateFormatSymbols().getMonths()[Integer.parseInt(parsedTime[1]) - 1];
 
-                                String neatTime = monthName + " " + parsedTime[2] +", " + parsedTime[0];
-                                if(parsedTime[3].equals("03:30:00")) {
+                                String neatTime = monthName + " " + parsedTime[2] + ", " + parsedTime[0];
+                                if (parsedTime[3].equals("03:30:00")) {
                                     neatTime += " - Time TBD";
                                 } else {
                                     DateFormat f1 = new SimpleDateFormat("hh:mm:ss");
                                     Date d = f1.parse(parsedTime[3]);
                                     DateFormat f2 = new SimpleDateFormat("h:mma");
-                                    neatTime += ", " + f2.format(d);;
+                                    neatTime += ", " + f2.format(d);
+                                    ;
                                 }
                                 event.setTime(neatTime);///////////
                                 JSONObject venue = obj.getJSONObject("venue");
@@ -159,6 +164,7 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
                                 event.setPopularity(obj.getString("score"));
 
                                 tempEventList.add(event);
+                            }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
