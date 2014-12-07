@@ -94,6 +94,9 @@ public class ListViewFragment extends ListFragment implements EndlessListView.En
         pDialog.setMessage("Loading...");
         pDialog.show();
 
+        String search = this.getArguments().getString("message");
+        url = url +"&q=" + search;
+
 
         makeJSONRequest(url + "&page=" + current_page);
         return rootView;

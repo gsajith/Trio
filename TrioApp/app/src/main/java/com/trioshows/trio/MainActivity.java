@@ -3,6 +3,7 @@ package com.trioshows.trio;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -18,11 +19,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import 	android.app.SearchManager;
+import 	android.widget.SearchView;
+import android.content.Intent;
 
 import com.slidingmenu.adapter.NavDrawerListAdapter;
 import com.slidingmenu.model.NavDrawerItem;
 
 import java.util.ArrayList;
+
 
 
 public class MainActivity extends Activity {
@@ -42,6 +48,8 @@ public class MainActivity extends Activity {
 
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
+
+    private String query = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +134,9 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
+
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -171,6 +182,28 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+                // this is your adapter that will be filtered
+                return true;
+            }
+
+            public boolean onQueryTextSubmit(String newquery) {
+                query = newquery;
+                //finish();
+                //startActivity(getIntent());
+                displayView(0);
+                return true;
+
+            }
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+
         return true;
     }
 
@@ -197,6 +230,9 @@ public class MainActivity extends Activity {
         switch (position) {
             case 0:
                 fragment = new ListViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("message", query );
+                fragment.setArguments(bundle);
                 break;
             case 1:
                 fragment = new StackViewFragment();
