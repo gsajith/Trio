@@ -194,7 +194,7 @@ public class MainActivity extends Activity {
             }
 
             public boolean onQueryTextSubmit(String newquery) {
-                query = newquery;
+                query = newquery.replaceAll(" ","+");
                 //finish();
                 //startActivity(getIntent());
                 displayView(0);
